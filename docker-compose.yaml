@@ -49,10 +49,15 @@ x-airflow-common:
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.5}
-  # build: .
+  # image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.5}
+  image: custom-airflow:latest
+  build: .
   environment:
     &airflow-common-env
+
+    NAVER_CLIENT_ID: Ukmes_xZmGq7nwg2i6sP
+    NAVER_CLIENT_SECRET: s_sQ3CI3L_
+    POSTGRES_URL: postgresql://airflow:airflow@postgres:5432/airflow
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
@@ -68,10 +73,11 @@ x-airflow-common:
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+    _PIP_ADDITIONAL_REQUIREMENTS: "konlpy beautifulsoup4 requests psycopg2-binary"
     # The following line can be used to set a custom config file, stored in the local config folder
     # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
     # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+    
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
@@ -102,7 +108,9 @@ services:
       interval: 10s
       retries: 5
       start_period: 5s
-    restart: always
+    restart: always 
+    ports:
+      - "5432:5432" 
 
   redis:
     # Redis is limited to 7.2-bookworm due to licencing change
@@ -286,6 +294,25 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+
+# Spark 세팅. master 1 worker 1
+  # spark:
+  #   image: bitnami/spark:3.5
+  #   environment:
+  #     - SPARK_MODE=master
+  #   ports:
+  #     - "7077:7077"
+  #     - "8081:8080"
+  #   volumes:
+  #     - ./spark-apps:/opt/spark-apps  # 스크립트 저장 경로 (선택)
+
+  # spark-worker:
+  #   image: bitnami/spark:3.5
+  #   depends_on:
+  #     - spark
+  #   environment:
+  #     - SPARK_MODE=worker
+  #     - SPARK_MASTER_URL=spark://spark:7077
 
 volumes:
   postgres-db-volume:

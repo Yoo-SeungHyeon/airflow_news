@@ -1,0 +1,28 @@
+[2025-04-24T06:25:32.292+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-24T06:25:32.306+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_etl.run_t_node manual__2025-04-24T06:22:48.546933+00:00 [queued]>
+[2025-04-24T06:25:32.312+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_etl.run_t_node manual__2025-04-24T06:22:48.546933+00:00 [queued]>
+[2025-04-24T06:25:32.312+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-04-24T06:25:32.320+0000] {taskinstance.py:2890} INFO - Executing <Task(BashOperator): run_t_node> on 2025-04-24 06:22:48.546933+00:00
+[2025-04-24T06:25:32.328+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=152) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-04-24T06:25:32.330+0000] {standard_task_runner.py:72} INFO - Started process 245 to run task
+[2025-04-24T06:25:32.330+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'news_etl', 'run_t_node', 'manual__2025-04-24T06:22:48.546933+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/New_ETL.py', '--cfg-path', '/tmp/tmpnj099e00']
+[2025-04-24T06:25:32.330+0000] {standard_task_runner.py:105} INFO - Job 4: Subtask run_t_node
+[2025-04-24T06:25:32.362+0000] {task_command.py:467} INFO - Running <TaskInstance: news_etl.run_t_node manual__2025-04-24T06:22:48.546933+00:00 [running]> on host 4f13ec8330ff
+[2025-04-24T06:25:32.406+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_etl' AIRFLOW_CTX_TASK_ID='run_t_node' AIRFLOW_CTX_EXECUTION_DATE='2025-04-24T06:22:48.546933+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-04-24T06:22:48.546933+00:00'
+[2025-04-24T06:25:32.407+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-24T06:25:32.417+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2025-04-24T06:25:32.418+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'python /opt/***/plugins/data_collection/T_node.py']
+[2025-04-24T06:25:32.428+0000] {subprocess.py:99} INFO - Output:
+[2025-04-24T06:26:52.722+0000] {subprocess.py:106} INFO - ⚠️ Error fetching https://kbench.com/?q=node/266878: HTTPSConnectionPool(host='kbench.com', port=443): Max retries exceeded with url: /?q=node/266878 (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:1010)')))
+[2025-04-24T06:26:52.723+0000] {subprocess.py:106} INFO - ⚠️ Error fetching https://kbench.com/?q=node/266879: HTTPSConnectionPool(host='kbench.com', port=443): Max retries exceeded with url: /?q=node/266879 (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:1010)')))
+[2025-04-24T06:26:52.723+0000] {subprocess.py:106} INFO - 
+[2025-04-24T06:26:52.724+0000] {subprocess.py:106} INFO - ✅ 저장 시작
+[2025-04-24T06:26:52.724+0000] {subprocess.py:106} INFO - ✅ 저장 완료
+[2025-04-24T06:26:52.764+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2025-04-24T06:26:52.780+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-24T06:26:52.780+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=news_etl, task_id=run_t_node, run_id=manual__2025-04-24T06:22:48.546933+00:00, execution_date=20250424T062248, start_date=20250424T062532, end_date=20250424T062652
+[2025-04-24T06:26:52.802+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-04-24T06:26:52.812+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-04-24T06:26:52.813+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
